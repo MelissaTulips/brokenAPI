@@ -10,18 +10,22 @@ use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller implements HasMiddleware
 {
+
+
     public static function middleware() {
         return [
-            new Middleware('auth:sanctum', except: ['index', 'show'])
+            new Middleware('auth:sanctum', except: ['index', 'show']),
         ];
     }
+    
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Post::all();
+        // return Post::all();
+        return Post::with('user')->get();
     }
 
     /**
